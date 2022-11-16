@@ -97,7 +97,7 @@ class DrinkApiController {
         $id = $params[':ID'];
 
         if(!$this->authHelper->loggedIn()){
-            $this->view->response("No estas logeado", 401);
+            $this->view->response("Not logged", 401);
             return;
         }
 
@@ -106,7 +106,7 @@ class DrinkApiController {
             $this->model->delete($id);
             $this->view->response($drink);
         } else 
-            $this->view->response("The Class with id=$id does not exist", 404);
+            $this->view->response("The Class with id = $id does not exist", 404);
     }
 
     function insertDrink($params = null) {

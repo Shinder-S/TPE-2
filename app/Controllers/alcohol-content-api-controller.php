@@ -89,11 +89,11 @@ class AlcoholContentApiController {
         $id = $params[':ID'];
         $alcohol_content = $this->model->get($id);
 
-        // si no existe devuelvo 404
+        // If don't exist 404
         if ($alcohol_content)
             $this->view->response($alcohol_content);
         else 
-            $this->view->response("Alcohol content doesn't match with id = $id no existe", 404);
+            $this->view->response("Alcohol content doesn't match with id = $id don't exist", 404);
     }
 
     public function deleteSubclass($params = null) {
@@ -116,7 +116,7 @@ class AlcoholContentApiController {
         $alcohol_content = $this->getData();
 
         if(!$this->authHelper->loggedIn()){
-            $this->view->response("No estas logeado", 401);
+            $this->view->response("Not logged", 401);
             return;
         }
 
@@ -133,7 +133,7 @@ class AlcoholContentApiController {
         $id = $params[':ID'];
 
         if(!$this->authHelper->loggedIn()){
-            $this->view->response("No estas logeado", 401);
+            $this->view->response("Not logged", 401);
             return;
         }
 
@@ -143,7 +143,7 @@ class AlcoholContentApiController {
             if (empty($alcohol_content->name) || empty($alcohol_content->brand) || empty($alcohol_content->id_drink)) {
                 $this->view->response("Complete data", 400);
             } else {
-                //ver si existe forma de devolver el id de un update, sin tener q volver a llamar denuevo a get(id)
+                //see if there is a way to return the id of an update, without having to call get(id) again
                 $this->model->edit($newAC->name, $newAC->brand, $newAC->id_drink, $id);
                 $alcohol_content = $this->model->get($id);
                 $this->view->response($alcohol_content, 201);

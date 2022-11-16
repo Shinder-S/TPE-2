@@ -93,7 +93,7 @@ class CategoryApiController {
             $this->view->response("La subclase con el id=$id no existe", 404);
     }
 
-    public function deleteSpecie($params = null) {
+    public function deleteCategory($params = null) {
         $id = $params[':ID'];
 
         if(!$this->authHelper->loggedIn()){
@@ -106,31 +106,31 @@ class CategoryApiController {
             $this->model->delete($id);
             $this->view->response($category);
         } else 
-            $this->view->response("La subclase con el id=$id no existe", 404);
+            $this->view->response("Category with id = $id doesn't exist", 404);
     }
 
-    public function insertSpecie($params = null) {
-        $specie = $this->getData();
+    public function insertCategory($params = null) {
+        $category = $this->getData();
 
         if(!$this->authHelper->loggedIn()){
-            $this->view->response("No estas logeado", 401);
+            $this->view->response("Not logged", 401);
             return;
         }
 
-        if (empty($specie->scientific_name) || empty($specie->author) || empty($specie->location)|| empty($specie->id_subclass)) {
+        if (empty($category->name) || empty($category->amount) || empty($category->photo)|| empty($category->id_category)) {
             $this->view->response("Complete los datos", 400);
         } else {
-            $id = $this->model->insert($specie->scientific_name, $specie->author, $specie->location, $specie->id_subclass);
-            $specie = $this->model->get($id);
-            $this->view->response($specie, 201);
+            $id = $this->model->insert($category->name, $category->amount, $category->photo, $category->id_category);
+            $category = $this->model->get($id);
+            $this->view->response($category, 201);
         }
     }
 
-    public function editSpecie($params = null) {
+    public function editCategory($params = null) {
         $id = $params[':ID'];
 
         if(!$this->authHelper->loggedIn()){
-            $this->view->response("No estas logeado", 401);
+            $this->view->response("Not logged", 401);
             return;
         }
 

@@ -9,7 +9,7 @@ class CategoryModel extends GeneralModel{
     }
     
     public function getAll($column, $value, $orderBy, $cond, $limit, $offset) {
-        $query = $this->db->prepare("SELECT * FROM specie WHERE $column = ? ORDER BY $orderBy $cond LIMIT ? OFFSET ?");
+        $query = $this->db->prepare("SELECT * FROM category WHERE $column = ? ORDER BY $orderBy $cond LIMIT ? OFFSET ?");
         $query->execute([$value, $limit, $offset]);
 
         $species = $query->fetchAll(PDO::FETCH_OBJ);
@@ -18,7 +18,7 @@ class CategoryModel extends GeneralModel{
     }
 
     public function getQuantRegisters() {
-        $query = $this->db->prepare("SELECT COUNT(*) FROM specie");
+        $query = $this->db->prepare("SELECT COUNT(*) FROM category");
         $query->execute();
 
         return $query->fetchColumn();
@@ -26,32 +26,32 @@ class CategoryModel extends GeneralModel{
     }
 
     public function get($id) {
-        $query = $this->db->prepare("SELECT * FROM specie WHERE id_specie = ?");
+        $query = $this->db->prepare("SELECT * FROM category WHERE id_category = ?");
         $query->execute([$id]);
         $specie = $query->fetch(PDO::FETCH_OBJ);
         
         return $specie;
     }
 
-    public function insert($scientific_name, $author, $location, $id_subclass) {
-        $query = $this->db->prepare("INSERT INTO specie (scientific_name, author, location, id_subclass) VALUES (?, ?, ?, ?)");
-        $query->execute([$scientific_name, $author, $location, $id_subclass]);
+    public function insert($name, $amount, $photo, $id_alcohol_content) {
+        $query = $this->db->prepare("INSERT INTO category (name, amount, photo, id_alcohol_content) VALUES (?, ?, ?, ?)");
+        $query->execute([$name, $amount, $photo, $id_alcohol_content]);
 
         return $this->db->lastInsertId();
     }
 
     function delete($id) {
-        $query = $this->db->prepare('DELETE FROM specie WHERE id_specie = ?');
+        $query = $this->db->prepare('DELETE FROM category WHERE id_category = ?');
         $query->execute([$id]);
     }
 
-    public function edit($scientific_name, $author, $location, $id_subclass, $id) {
-        $query = $this->db->prepare("UPDATE specie SET scientific_name=?,
-                                                    author=?,
-                                                    location=?,
-                                                    id_subclass=? 
-                                            WHERE id_specie=?");
-        $query->execute([$scientific_name, $author, $location, $id_subclass, $id]);
+    public function edit($name, $amount, $photo, $id_alcohol_content, $id) {
+        $query = $this->db->prepare("UPDATE category SET name = ?,
+                                                    amount = ?,
+                                                    photo = ?,
+                                                    id_alcohol_content = ? 
+                                            WHERE id_category = ?");
+        $query->execute([$name, $amount, $photo, $id_alcohol_content, $id]);
 
         return $query->fetch(PDO::FETCH_OBJ);
     }
