@@ -2,12 +2,12 @@
 
 class ApiView{
 
-    function response($data, $status){
+    function response($data, $status = 200){
         header('Content-type: application/json');
         header('HTTP/1.1 ' . $status . ' ' . $this->_requestStatus($status));
         
         //Convert data to Json format
-        echo json_decode($data);
+        echo json_encode($data);
     }
 
     private function _requestStatus($code){

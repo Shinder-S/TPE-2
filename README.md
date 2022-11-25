@@ -26,19 +26,19 @@ DELETE - You can delete a register from the Entity "Drink" with an specific id; 
 ## Api-Alcohol-Content:
 
 GET - You can get all registers from the Entity "Alcohol-Content":
-    http://localhost/Web2/TPE-2/api/alcohol-contents
+    http://localhost/Web2/TPE-2/api/alcoholContents
 
 GET ID - You cand get the register from the Entity "Alcohol-Content" with an specific id:
-    http://localhost/Web2/TPE-2/api/alcohol-contents/:id
+    http://localhost/Web2/TPE-2/api/alcoholContents/:id
 
 POST - You can create a new register from the Entity "Alcohol-Content"; token is required:
-    http://localhost/Web2/TPE-2/api/alcohol-contents
+    http://localhost/Web2/TPE-2/api/alcoholContents
 
 PUT - You can modify a register from the Entity "Alcohol-Content" with an specific id; token is required:
-    http://localhost/Web2/TPE-2/api/alcohol-contents/:id
+    http://localhost/Web2/TPE-2/api/alcoholContents/:id
 
 DELETE - You can delete a register from the Entity "Alcohol-Content" with an specific id; token is required:
-    http://localhost/Web2/TPE-2/api/alcohol-contents/:id
+    http://localhost/Web2/TPE-2/api/alcoholContents/:id
 
 ## Api-Category:
 
@@ -56,3 +56,21 @@ PUT - You can modify a register from the Entity "Categories" with an specific id
 
 DELETE - You can delete a register from the Entity "Categories" with an specific id; token is required:
     http://localhost/Web2/TPE-2/api/categories/:id
+
+## Filtering
+In the GET endpoint, add two query params:
+    ?filter="name of column"
+    ?value="value to filter"
+
+The default will be 1 and 1
+
+## Sorting
+In the GET endpoint, add this query params:
+    ?orderBy="name of column"
+
+The default will be id column
+
+## Pagination
+In the GET endpoint, add two query params:
+    ?page=name of the page
+    ?limit=quantity of items
